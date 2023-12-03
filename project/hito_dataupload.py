@@ -6,17 +6,17 @@ import re
 conn = psycopg2.connect(host="localhost",
     database="batos",
     user="postgres",
-    password="password", port="5432")
+    password="databasepassword", port="5432")
 
 cur = conn.cursor()
 
-def findOrInsertPlayer(table, name):
+def findOrInsertPlayer(table, name, age=0):
     cur.execute("select player_id from "+table+" where name=%s limit 1", [name])
     r = cur.fetchone()
     if(r):
         return r[0]
     else:
-        cur.execute("insert into "+table+" (name,age) values (%s,%s) returning player_id", [name,0])
+        cur.execute("insert into "+table+" (name,age) values (%s,%s) returning player_id", [name,age])
         return cur.fetchone()[0]
 
 def findOrInsertTeam(table, name, abb):
@@ -88,8 +88,9 @@ def findOrInsertawards(table,award,pts_id,pts_won):
         return cur.fetchone()[0]
 
 #----------------------- Insertar Team y Season -----------------------
-with open('archivos/TeamTotals.csv') as csvfile:
+with open('project/csv_files/TeamTotals.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    expresion_regular = r'\bNA\w*\b'
     i = 0
     for row in reader:
         i+=1
@@ -104,8 +105,6 @@ with open('archivos/TeamTotals.csv') as csvfile:
         league = row[1]
         season_id = findOrInsertSeason("batos.season", year, league)
         #--------------------- Insertar TeamSeason -------------------
-        expresion_regular = r'\bNA\w*\b'
-
         x2P = row[13]   if not re.findall(expresion_regular,row[13]) else 0
         x2PA = row[14]  if not re.findall(expresion_regular,row[14]) else 0
         x2Pp = row[15]  if not re.findall(expresion_regular,row[15]) else 0.0
@@ -125,8 +124,10 @@ with open('archivos/TeamTotals.csv') as csvfile:
         team_season_id = findOrInsertTeamSeason("batos.team_season",season_id,team_id,x2P,x2PA,x2Pp,FTp,FG,FGA,FGp,FT,x3P,x3PA,x3Pp,assists,pf,blocks,drb,stl)
 
 #----------------------- Insertar Player y PlayerTeamSeason -----------------------
-with open('archivos/PlayerTotals.csv') as csvfile:
+with open('project/csv_files/PlayerTotals.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=';', quotechar='"')
+    expresion_regular = r'(^$|\bNA\w*\b|\s+)'
+    expresion_regular2 = r'^\s*$'
     i = 0
     for row in reader:
         i+=1
@@ -136,15 +137,15 @@ with open('archivos/PlayerTotals.csv') as csvfile:
         #findorinsertTEAM = team_id
         abb= row [9].strip()
         team_id=findTeamNameByAbb("batos.team",abb)
-        year=row[1]
-        season_id=findOrInsertSeason("batos.season",year,"error")
-        
-        name = row[3]
-        #age = row[4]
-        player_id = findOrInsertPlayer("batos.player", name)
-    #-----------------Insertar PlayerTeamSeason-----------#
-        expresion_regular = r'(^$|\bNA\w*\b|\s+)'
 
+        year= int(row[1])
+        season_id=findOrInsertSeason("batos.season",year,"error")
+
+        name = row[3]
+        age = int(row[6]) if not re.findall(expresion_regular2,row[6]) else year
+        birthday = year - int(age)
+        player_id = findOrInsertPlayer("batos.player", name, birthday)
+    #-----------------Insertar PlayerTeamSeason-----------#
         experience= row[7]  if not re.findall(expresion_regular,row[7]) else 0
         player_pos=row[5]  
         x3P=row[16]         if not re.findall(expresion_regular,row[16]) else 0
@@ -172,7 +173,7 @@ with open('archivos/PlayerTotals.csv') as csvfile:
                                                           ,FGA,FG,x2P,dbpm,obpm,ows,dws,x2PA,x3PA,FTp,FT,x3Pp,FGp,x2Pp,assists,pf,blocks,drb,stl,avg_dist_fga)
         
 #---------------------------- Insertar awards ------------------------------#
-with open('archivos/PlayerAwardShares.csv', encoding="utf8") as csvfile:
+with open('project/csv_files/PlayerAwardShares.csv', encoding="utf8") as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     expresion_regular = r'\bNA\w*\b'
     i = 0
