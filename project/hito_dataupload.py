@@ -126,7 +126,7 @@ with open('project/csv_files/TeamTotals.csv') as csvfile:
 #----------------------- Insertar Player y PlayerTeamSeason -----------------------
 with open('project/csv_files/PlayerTotals.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=';', quotechar='"')
-    expresion_regular = r'(^$|\bNA\w*\b|\s+)'
+    expresion_regular = r'^(?:\s*NA\s*|\s*|\s*NA\s*)$'
     expresion_regular2 = r'^\s*$'
     i = 0
     for row in reader:
