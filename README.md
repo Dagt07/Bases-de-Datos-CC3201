@@ -8,7 +8,7 @@ The primary aim of this project is to study and analyze the evolution of the spo
 
 - **Offensive Surge:** We will evaluate how the points per game have changed across seasons. Has there been a surge in offense? Is there any relation to other factors?
   
-- **Impact of 3-Point Shooting:** We will investigate the relationship between the increase in 3-point attempts and their effectiveness with the game's evolution and the total score per game.
+- **Impact of 3-Point Shooting:** We will investigate the relationship between the increase in 3-point attempts and their effectiveness with the game's evolution and the total score per game..
 
 ## Dataset
 
