@@ -2,10 +2,10 @@
 
 ## Integrantes:
 
-- David García T. - Sección 1
-- José Villalobos C. - Sección 1
-- Martín Bahamonde M. - Sección 1
-- Víctor Alfaro P. - Sección 1
+- David García T. - [github Dagt07](https://github.com/Dagt07)
+- José Villalobos C. - [github JVC2003](https://github.com/JVC2003)
+- Martín Bahamonde M. - [github Asterix265](https://github.com/Asterix265)
+- Víctor Alfaro P. - [github gitonina](https://github.com/gitonina)
 
 ## Fuente de Datos:
 
