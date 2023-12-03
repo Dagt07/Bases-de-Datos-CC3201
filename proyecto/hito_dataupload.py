@@ -105,7 +105,6 @@ with open('archivos/TeamTotals.csv') as csvfile:
         season_id = findOrInsertSeason("batos.season", year, league)
         #--------------------- Insertar TeamSeason -------------------
         expresion_regular = r'\bNA\w*\b'
-        #coincidencias = re.findall(expresion_regular, texto)
 
         x2P = row[13]   if not re.findall(expresion_regular,row[13]) else 0
         x2PA = row[14]  if not re.findall(expresion_regular,row[14]) else 0
@@ -145,7 +144,7 @@ with open('archivos/PlayerTotals.csv') as csvfile:
         player_id = findOrInsertPlayer("batos.player", name)
     #-----------------Insertar PlayerTeamSeason-----------#
         expresion_regular = r'(^$|\bNA\w*\b|\s+)'
-        #expresion_regular2 = r'^$'
+
         experience= row[7]  if not re.findall(expresion_regular,row[7]) else 0
         player_pos=row[5]  
         x3P=row[16]         if not re.findall(expresion_regular,row[16]) else 0
@@ -169,9 +168,10 @@ with open('archivos/PlayerTotals.csv') as csvfile:
         drb=row[27]         if not re.findall(expresion_regular,row[27]) else 0
         stl=row[30]         if not re.findall(expresion_regular,row[30]) else 0
         avg_dist_fga=row[39]    if not re.findall(expresion_regular,row[39]) else 0.0
-        Player_Team_Season_id=findOrInserPlayerTeamSeason("batos.player_team_season",player_id,season_id,team_id,experience,player_pos,x3P,FGA,FG,x2P,dbpm,obpm,ows,dws,x2PA,x3PA,FTp,FT,x3Pp,FGp,x2Pp,assists,pf,blocks,drb,stl,avg_dist_fga)
-#--------Insertar awards------------#s
-
+        Player_Team_Season_id=findOrInserPlayerTeamSeason("batos.player_team_season",player_id,season_id,team_id,experience,player_pos,x3P
+                                                          ,FGA,FG,x2P,dbpm,obpm,ows,dws,x2PA,x3PA,FTp,FT,x3Pp,FGp,x2Pp,assists,pf,blocks,drb,stl,avg_dist_fga)
+        
+#---------------------------- Insertar awards ------------------------------#
 with open('archivos/PlayerAwardShares.csv', encoding="utf8") as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     expresion_regular = r'\bNA\w*\b'
@@ -184,28 +184,10 @@ with open('archivos/PlayerAwardShares.csv', encoding="utf8") as csvfile:
         name=row[2]
         year=row[0]
         abb=row[4].strip()
-        #print("abb: ",abb)
         player_id = findOrInsertPlayer("batos.player", name)
-        #print("player id: ",player_id)
         season_id=findOrInsertSeason("batos.season",year,"error")
-        #print("season id: ",season_id)
         team_id=findTeamNameByAbb("batos.team",abb)
-        #print("team id: ",team_id)
-
-
-        #print("busqueda a manito")
-        #query = "select id from batos.player_team_season where player_id="+str(player_id)+" and season_id="+str(season_id)+" and team_id="+str(team_id)+";"
-        #cur.execute(query)
-        #r = cur.fetchone()
-        #print(r)
-
         Player_Team_Season_id = findPlayerTeamSeasonByids("batos.player_team_season", player_id, season_id, team_id)
-        #print("player team season id: ",Player_Team_Season_id)
-        
-
-        #retornar el id de la season por year
-
-        #findorInsertTeamSeasonPlayer por id del jugador , por id del team y id del año --> te retorna el id de playerTeamSeason = Player_Team_Season_id
 
         if Player_Team_Season_id is None:
             continue
@@ -213,6 +195,7 @@ with open('archivos/PlayerAwardShares.csv', encoding="utf8") as csvfile:
             award=row[1]
             pts_won=row[6]  if not re.findall(expresion_regular,row[6]) else 0
             player_award_shares=findOrInsertawards("batos.awards", award, Player_Team_Season_id, pts_won)
-    
+
+#---------------------------- Commit & Close ------------------------------# 
     conn.commit()
 conn.close()
