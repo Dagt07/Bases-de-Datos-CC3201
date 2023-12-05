@@ -17,7 +17,7 @@
 
 To study through a data analysis the evolution of the sport in this league, which has changed so much from its beginnings to the present day (for example, the increase over time in offense/points per game, the relationship of this with the increase in effective 3-point shot attempts).
 
-## Modelo entidad relación
+## Entity-Relationship Model (Modelo entidad relación)
 
 Entity-Relationship model of the project, phase 1 (pre-feedback) / Modelo entidad relación del proyecto, hito 1 (pre feedback):
 
