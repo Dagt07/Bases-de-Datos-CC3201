@@ -1,49 +1,55 @@
 # Semi-annual project Databases / Proyecto semestral Bases de Datos
 
-## Integrantes:
+## Members (Integrantes):
 
 - David García T. - [github Dagt07](https://github.com/Dagt07)
 - José Villalobos C. - [github JVC2003](https://github.com/JVC2003)
 - Martín Bahamonde M. - [github Asterix265](https://github.com/Asterix265)
 - Víctor Alfaro P. - [github gitonina](https://github.com/gitonina)
 
-## Fuente de Datos:
+## Data Source (Fuente de Datos):
 
 [NBA Stats (1947-present)](https://www.kaggle.com/sumitrodatta/nba-aba-baa-stats)
 
-[https://www.kaggle.com/sumitrodatta/nba-aba-baa-stats](https://www.kaggle.com/sumitrodatta/nba-aba-baa-stats)
+![Data Source](project%20images/datasource.png)
 
-Extraídos de una de las paginas de fuentes de datos brindadas por el cuerpo docente
+## Problem to solve (Problema a resolver):
 
-## Problema a resolver:
-
-Estudiar mediante un *análisis de datos* la evolución del deporte en esta liga, que tanto ha cambiado desde sus inicios a la actualidad el deporte (ejemplo aumento a través del tiempo de la ofensiva/cantidad de puntos por juego, relación de esto último con el aumento de lanzamientos de 3 puntos efectivos).
+To study through a data analysis the evolution of the sport in this league, which has changed so much from its beginnings to the present day (for example, the increase over time in offense/points per game, the relationship of this with the increase in effective 3-point shot attempts).
 
 ## Modelo entidad relación
 
-modelo entidad relación del proyecto, hito 1 (pre feedback):
+Entity-Relationship model of the project, phase 1 (pre-feedback) / Modelo entidad relación del proyecto, hito 1 (pre feedback):
 
-![ModeloER hito 1.drawio.png](project%20images/ModeloER_hito_1.drawio.png)
+![ModeloERhito1](project%20images/ModeloER_hito1.png)
 
-modelo entidad relación del proyecto hito 2 (post feedback):
+Entity-Relationship model of the project, phase 2 (post-feedback) / Modelo entidad relación del proyecto hito 2 (post feedback):
 
-![ModeloER hito2.drawio (2).png](project%20images/ModeloER_hito2.drawio_(2).png)
+![ModeloERhito2](project%20images/ModeloER_hito2.png)
 
-## Modelo relacional
+Entity-Relationship model of the project, phase 2 (post-feedback) / Modelo entidad relación del proyecto hito 2 (post feedback):
 
-modelo relacional del proyecto, hito 1 (pre feedback):
+![ModeloERhito2](project%20images/ModeloER_hito3.png)
 
-![Untitled](project%20images/Untitled.png)
+## Entity-Relationship Model (Modelo relacional)
 
-modelo relacional del proyecto, hito 2 (post feedback):
+Relational model of the project, phase 1 (pre-feedback) / Modelo relacional del proyecto, hito 1 (pre feedback):
 
-![Untitled](project%20images/Untitled%201.png)
+![Untitled](project%20images/ModeloRHito2.png)
 
-## Código SQL Creación de tablas
+Relational model of the project, phase 2 (post-feedback) / Modelo relacional del proyecto, hito 2 (post feedback):
 
-Cabe destacar que nuestro proyecto consiste en un análisis de datos (y no una página web) por tanto no nos proporcionaron una VM. Consultamos con el profe y nos recomendó crear la base de datos usando postgres. Para ello usamos beekeper studio para crear la data base: ‘batos’.
+![Untitled](project%20images/ModeloRHito2feedback.png)
 
-Luego el código SQL usado para crear las tablas de acuerdo a nuestro modelo relacional es el siguiente:
+Relational model of the project, phase 3 (post-feedback) / Modelo relacional del proyecto, hito 3 (post feedback):
+
+![Untitled](project%20images/ModeloRhito3.jpeg)
+
+## SQL Table Creation Code (Código SQL Creación de tablas)
+
+It's worth mentioning that our project consists of a data analysis (and not a web page), therefore, we were not provided with a VM (Virtual Machine). We consulted with the teacher and they recommended us to create the database using PostgreSQL. For this purpose, we used Beekeeper Studio to create the database: 'batos'.
+
+Then, the SQL code used to create the tables according to our relational model is as follows:
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS batos;
@@ -119,27 +125,23 @@ CREATE TABLE batos.awards (
 );
 ```
 
-## Glosario de términos
-
-- dws (defensive win share): Estadística que contempla el impacto/habilidad que tiene un jugador para prevenir que el equipo
-rival anote.
-- ows (offensive win share): Estadistica que contempla el impacto/habilidad que tiene un jugador anotar al equipo rival
-- obpm(offensive box plus/minus): Mide la aportacion al rendimiento total del equipo en ataque a traves de las estadisticas del
-jugador, por cada cien posesiones
-- dbm(deffensive box plus/minus): Mide la aportacion al rendimiento total del equipo en defense a traves de las estadisticas
-del jugador, por cada cien posesiones.
-- 2p%: Porcentaje que refleja el acierto de un jugador al anotar 2 puntos
-- 2p: Cantidad de dobles que anoto un jugador en una temporada
-- 2pa: Cantidad de doble que intentó un jugador, no necesariamente es igual a 2p.
-- FT: La cantidad de tiros libres que anotó un jugador
-- FT%: Porcentaje que refleja la cantidad de tiros libres anotados por un jugador.
-- FGA: Cantidad de tiros intentados tanto de triples como de dobles.
-- FG: Cantidad de tiros anotados, tanto triples como dobles.
-- assists: asistencias de un jugador en una temporada.
-- pf: fouls de un jugador en una temporada.
-- blocks: Cada de bloqueos/tapones de un jugador.
-- drb:  Cantidad de rebotes defensivos
-- stl: Cantidad de robos
-- experience: Cantidad de años jugados por un jugador desde su llegada a la NBA.
-- player-position: alude a la posicion en la que juega un jugador por el equipo, puede ser escolta, alero, base, etc.
-- avg_dist_fga: Promedio de la distancia de los tiros intentados.
+## Glossary of terms (Glosario de términos)
+- **dws (defensive win share)**: Statistic that considers the impact/ability of a player to prevent the opposing team from scoring.
+- **ows (offensive win share)**: Statistic that considers the impact/ability of a player to score against the opposing team.
+- **obpm (offensive box plus/minus)**: Measures the contribution to the team's total performance in attack through player statistics, per hundred possessions.
+- **dbm (defensive box plus/minus)**: Measures the contribution to the team's total performance in defense through player statistics, per hundred possessions.
+- **2p%**: Percentage reflecting a player's success in scoring 2-pointers.
+- **2p**: Number of 2-pointers scored by a player in a season.
+- **2pa**: Number of attempted 2-pointers by a player, not necessarily equal to 2p.
+- **FT**: Number of free throws made by a player.
+- **FT%**: Percentage reflecting the number of free throws made by a player.
+- **FGA**: Number of shots attempted, both 3-pointers and 2-pointers.
+- **FG**: Number of shots made, both 3-pointers and 2-pointers.
+- **assists**: Player's assists in a season.
+- **pf**: Player's fouls in a season.
+- **blocks**: Number of blocks by a player.
+- **drb**: Number of defensive rebounds.
+- **stl**: Number of steals.
+- **experience**: Number of years played by a player since joining the NBA.
+- **player-position**: Refers to the position a player plays for the team, could be shooting guard, small forward, point guard, etc.
+- **avg_dist_fga**: Average distance of attempted shots.
